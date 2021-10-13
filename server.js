@@ -25,7 +25,7 @@ const server = app.listen(port, () => console.log(`server is running on localhos
 app.post('/addData', (req, res) => {
     projectData = {
         temperature: req.body.temp,
-        weatherState: req.body.data,
+        Date: req.body.date,
         feeling: req.body.flng,
     };
 
