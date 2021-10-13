@@ -2,11 +2,12 @@
 
 
 const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
-const apiKey = '&appid=164de3f9950ed609a3d1ddab1c723f31';
+const apiKey = '&appid=164de3f9950ed609a3d1ddab1c723f31&units=imperial';
 //i do not know why this statement does not work
 // const newWeatherState = document.getElementById('zip').value;
 const newWeatherState = '94040'
-
+const currentDate = new Date();
+const today = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`;
 // Event listener to add function to existing HTML DOM element
 document.getElementById('generate').addEventListener('click', performAction);
 /* Function called by event listener */
@@ -15,7 +16,7 @@ function performAction(e) {
     getWeatherDemo(baseURL, newWeatherState, apiKey)
         .then(function (data) {
             console.log(data);
-            postData('/addData', { temp: data.main.temp, data: data.weather[0].description, flng: feelings })
+            postData('/addData', { temp: data.main.temp, date: today, flng: feelings })
         });
     updateUI();
 
@@ -66,7 +67,7 @@ const updateUI = async () => {
     try {
         const allData = await res.json();
         // console.log(allData);
-        document.getElementById('date').innerHTML = allData.weatherState;
+        document.getElementById('date').innerHTML = allData.Date;
         document.getElementById('temp').innerHTML = allData.temperature;
         document.getElementById('content').innerHTML = allData.feeling;
 
